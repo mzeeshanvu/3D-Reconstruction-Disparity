@@ -1,0 +1,18 @@
+# Generated results. Everything here is reproducible with `python main.py`.
+output/
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Environments
+.venv/
+venv/
+env/
+
+# Editor / OS
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini

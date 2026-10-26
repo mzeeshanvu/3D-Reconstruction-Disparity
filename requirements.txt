@@ -1,0 +1,12 @@
+# 3D reconstruction from a stereo disparity map.
+#
+#   python -m venv .venv
+#   .venv\Scripts\python.exe -m pip install -r requirements.txt
+#   .venv\Scripts\python.exe main.py
+
+numpy>=1.21
+matplotlib>=3.4     # every figure (forced onto the headless Agg backend)
+
+# Calibration, the block matchers, and image I/O. Pinned below 5.0 to match
+# the sibling repositories in this project.
+opencv-contrib-python>=4.5,<5
