@@ -128,7 +128,7 @@ def describe(stats):
     return "\n".join(lines)
 
 
-def suggest_num_disparities(stats, margin=1.5):
+def suggest_num_disparities(stats, margin=1.5, default=64):
     """
     A `numDisparities` that covers the measured range.
 
@@ -139,10 +139,15 @@ def suggest_num_disparities(stats, margin=1.5):
 
     :param margin: headroom over the measured maximum, since sparse feature
                    matches will miss the very nearest surfaces
+    :param default: returned when `stats` carries no measurement -- the
+                    check was skipped, or it failed. Guessing the floor of
+                    16 there would quietly clip every near surface, which is
+                    the worse failure: too wide only costs time.
     """
-    hi = stats.get("disparity_max", 0.0)
-    needed = max(16, int(np.ceil(hi * margin / 16.0)) * 16)
-    return int(needed)
+    hi = stats.get("disparity_max")
+    if hi is None:
+        return int(default)
+    return int(max(16, int(np.ceil(hi * margin / 16.0)) * 16))
 
 
 def rectify_pair(left, right, K, dist, R, T):

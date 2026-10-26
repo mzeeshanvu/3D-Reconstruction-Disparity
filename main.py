@@ -195,8 +195,10 @@ def stage_disparity(args, left, right, rect_stats, out_dir):
 
     num = args.num_disparities
     if num is None:
-        num = rectify.suggest_num_disparities(rect_stats) if rect_stats else 64
-        print(f"  search width measured from the pair: {num} px")
+        num = rectify.suggest_num_disparities(rect_stats)
+        measured = "disparity_max" in rect_stats
+        print(f"  search width {'measured from the pair' if measured else 'not measured, using the default'}"
+              f": {num} px")
     else:
         print(f"  search width: {num} px")
 
